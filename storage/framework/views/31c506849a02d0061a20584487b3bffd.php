@@ -1,0 +1,2 @@
+<?php $__env->startSection('title', 'contact'); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Documents\Pendidikan\KULIAH\SEMESTER III\Rekayasa Web\soal\resources\views/page/contact.blade.php ENDPATH**/ ?>

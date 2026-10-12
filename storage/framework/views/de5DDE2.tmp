@@ -1,0 +1,10 @@
+<?php $__env->startSection('title', 'About'); ?>
+
+<?php $__env->startSection('content'); ?>
+<div class="py-1">
+    <div class="mb-5 fade-in-up">
+        <div class="fw-bold" style="font-size: 2rem; color: rgb(65, 88, 194);">WORKS</div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Documents\Pendidikan\KULIAH\SEMESTER III\Rekayasa Web\soal\resources\views/page/works.blade.php ENDPATH**/ ?>

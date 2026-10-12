@@ -1,0 +1,103 @@
+<?php echo app('Illuminate\Foundation\Vite')(['resources/css/home.css']); ?>
+<?php $__env->startSection('title', 'Home'); ?>
+
+<?php $__env->startSection('content'); ?>
+    <div class="row align-items-center" style="min-height: 85vh;">
+        <div class="col-md-5">
+            <div class="text-banner">
+                <h1 class="fw-bold" style="font-size: 3rem; color: rgb(65, 88, 194);"><?php echo e($textBanner['title']); ?></h1>
+                <h4 class="fw-bold"><?php echo e($textBanner['subtitle']); ?></h4>
+                <p class="my-3 text-muted" style="text-align: justify; width: 80%;"><?php echo e($textBanner['description']); ?></p>
+            </div>
+        </div>
+
+        <div class="col-md-7 position-relative">
+            <div id="slide-bg-1" class="banner-bg" style="background-image: url('<?php echo e($banners[0]['image']); ?>'); opacity: 0.65;"></div>
+            <div id="slide-bg-2" class="banner-bg" style="background-image: url('<?php echo e($banners[1]['image']); ?>'); opacity: 0;"></div>
+            
+            <div class="slide-indicator">
+                <span id="slide-title" class="fw-bold text-muted"><?php echo e($banners[0]['title']); ?></span>
+                <div class="d-flex gap-2 mt-2">
+                    <div class="indicator-line"><div class="indicator-progress" id="progress-0"></div></div>
+                    <div class="indicator-line"><div class="indicator-progress" id="progress-1"></div></div>
+                    <div class="indicator-line"><div class="indicator-progress" id="progress-2"></div></div>
+                </div>
+            </div>
+
+            <div class="poster-container">
+                <img src="<?php echo e(asset('images/Lycoris Recoil.jpg')); ?>" class="poster poster-1 shadow-lg rounded-3" alt="Poster 1">
+                <img src="<?php echo e(asset('images/Make Heroine ga Oosugiru!.jpg')); ?>" class="poster poster-2 shadow-lg rounded-3" alt="Poster 2">
+                <img src="<?php echo e(asset('images/High School Fleet Movie.jpg')); ?>" class="poster poster-3 shadow-lg rounded-3" alt="Poster 3">
+                <img src="<?php echo e(asset('images/Hachigatsu no Cinderella Nine PV.jpg')); ?>" class="poster poster-4 shadow-lg rounded-3" alt="Poster 4">
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <div class="text-center py-2">
+            <h5 class="text-muted fw-semibold">LIST WORKS</h5>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <?php $__currentLoopData = $works; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $work): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="<?php echo e($work->image); ?>" class="card-img-top" alt="<?php echo e($work->title); ?> Poster">
+                        <div class="card-body">
+        </div>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = <?php echo json_encode($banners, 15, 512) ?>;
+        
+        let currentIndex = 0;
+        let activeBg = 1;
+        
+        const bg1 = document.getElementById('slide-bg-1');
+        const bg2 = document.getElementById('slide-bg-2');
+        const titleElement = document.getElementById('slide-title');
+        
+        const progresses = [
+            document.getElementById('progress-0'),
+            document.getElementById('progress-1'),
+            document.getElementById('progress-2')
+        ];
+
+        function startProgress() {
+            progresses.forEach(p => {
+                p.style.transition = 'none';
+                p.style.width = '0%';
+            });
+            
+            setTimeout(() => {
+                progresses[currentIndex].style.transition = 'width 4.9s linear';
+                progresses[currentIndex].style.width = '100%';
+            }, 50);
+        }
+
+        function nextSlide() {
+            titleElement.style.opacity = 0;
+            currentIndex = (currentIndex + 1) % slides.length;
+            
+            const nextBg = activeBg === 1 ? bg2 : bg1;
+            const currentBg = activeBg === 1 ? bg1 : bg2;
+            
+            nextBg.style.backgroundImage = `url('${slides[currentIndex].image}')`;
+            nextBg.style.opacity = 0.65;
+            currentBg.style.opacity = 0;
+            
+            activeBg = activeBg === 1 ? 2 : 1;
+
+            setTimeout(() => {
+                titleElement.textContent = slides[currentIndex].title;
+                titleElement.style.opacity = 1;
+            }, 500);
+
+            startProgress();
+        }
+
+        startProgress();
+        setInterval(nextSlide, 5000);
+    });
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Documents\Pendidikan\KULIAH\SEMESTER III\Rekayasa Web\soal\resources\views/page/home.blade.php ENDPATH**/ ?>
